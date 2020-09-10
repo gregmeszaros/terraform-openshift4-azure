@@ -21,8 +21,6 @@ controlPlane:
       osDisk:
         diskSizeGB: ${var.master_os_disk_size}
         diskType: Premium_LRS
-      zones:
-      - "1"
   replicas: ${var.master_count}
 metadata:
   creationTimestamp: null
