@@ -221,7 +221,7 @@ spec:
         name: master-user-data
       vmSize: ${var.master_vm_type}
       vnet: ${var.virtual_network_name}
-      zone: 1
+      zone: ""
 status: {}
 EOF
 }
@@ -250,7 +250,7 @@ metadata:
   name: ${var.cluster_id}-worker-${var.azure_region}${count.index + 1}
   namespace: openshift-machine-api
 spec:
-  replicas: 5
+  replicas: ${var.worker_count}
   selector:
     matchLabels:
       machine.openshift.io/cluster-api-cluster: ${var.cluster_id}
@@ -301,7 +301,7 @@ spec:
             name: worker-user-data
           vmSize: ${var.worker_vm_type}
           vnet: ${var.virtual_network_name}
-          zone: 1
+          zone: ""
 status:
   replicas: 0
 EOF
@@ -384,7 +384,7 @@ spec:
             name: worker-user-data
           vmSize: ${var.infra_vm_type}
           vnet: ${var.virtual_network_name}
-          zone: 1
+          zone: ""
 EOF
 }
 
