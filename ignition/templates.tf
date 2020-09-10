@@ -23,8 +23,6 @@ controlPlane:
         diskType: Premium_LRS
       zones:
       - "1"
-      - "2"
-      - "3"
   replicas: ${var.master_count}
 metadata:
   creationTimestamp: null
@@ -223,7 +221,7 @@ spec:
         name: master-user-data
       vmSize: ${var.master_vm_type}
       vnet: ${var.virtual_network_name}
-      zone: "${count.index + 1}"
+      zone: 1
 status: {}
 EOF
 }
@@ -252,7 +250,7 @@ metadata:
   name: ${var.cluster_id}-worker-${var.azure_region}${count.index + 1}
   namespace: openshift-machine-api
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       machine.openshift.io/cluster-api-cluster: ${var.cluster_id}
@@ -303,7 +301,7 @@ spec:
             name: worker-user-data
           vmSize: ${var.worker_vm_type}
           vnet: ${var.virtual_network_name}
-          zone: "${count.index + 1}"
+          zone: 1
 status:
   replicas: 0
 EOF
@@ -386,7 +384,7 @@ spec:
             name: worker-user-data
           vmSize: ${var.infra_vm_type}
           vnet: ${var.virtual_network_name}
-          zone: "${count.index + 1}"
+          zone: 1
 EOF
 }
 
